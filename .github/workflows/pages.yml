@@ -11,6 +11,7 @@ jobs:
       - run: mkdir -p data && touch data/tags.txt
       - run: git show-ref --tags --heads > data/tags.txt
       - run: sed -i '' 's+refs/tags/++g' data/tags.txt
+      - run: sed -i '' 's+refs/heads/++g' data/tags.txt
       - uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           branch: gh-pages
