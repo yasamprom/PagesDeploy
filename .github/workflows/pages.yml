@@ -1,6 +1,6 @@
 name: pages
 on:
-  release:
+  push:
     branches:
       - master
 jobs:
