@@ -10,7 +10,9 @@ jobs:
       - uses: actions/checkout@v3
       - run: echo "Hi!"
       - run: export tag=${GITHUB_REF#refs/heads/}
+      - run: echo $tag
       - run: export hash=$(git rev-parse --short '$GITHUB_SHA')
+      - run: echo $hash
       - uses: actions/setup-python@v2
       - uses: jannekem/run-python-script-action@v1
         with:
