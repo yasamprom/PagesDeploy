@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: mkdir data && touch data/tags.txt
+      - run: mkdir -p data && touch data/tags.txt
       - run: git show-ref --tags >> data/tags.txt
       - run:  sed -i'' -e  's+refs/tags/++g' data/a.txt
       - uses: JamesIves/github-pages-deploy-action@4.1.4
