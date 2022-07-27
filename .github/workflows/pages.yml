@@ -9,8 +9,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-        export tag=${GITHUB_REF#refs/heads/}
-        export hash=$(git rev-parse --short "$GITHUB_SHA")
+        "export tag=${GITHUB_REF#refs/heads/}"
+        "export hash=$(git rev-parse --short '$GITHUB_SHA')"
       - uses: actions/setup-python@v2
       - uses: jannekem/run-python-script-action@v1
         with:
