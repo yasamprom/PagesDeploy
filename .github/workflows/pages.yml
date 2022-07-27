@@ -1,6 +1,6 @@
 name: pages
 on:
-  push:
+  release:
     branches:
       - master
 jobs:
@@ -8,16 +8,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - run: |
+        tag=${GITHUB_REF#refs/heads/}
+        hash=$(git rev-parse --short "$GITHUB_SHA")
       - uses: actions/setup-python@v2
       - uses: jannekem/run-python-script-action@v1
         with:
-          script: |
+          script: |            
             import os
-            os.mkdir("data")
-            f = open("data/file.txt", "a")
-            f.write("Now the file has more content!")
+            os.mkdir("data/" + tag)
+            f = open("data/" + tag + "/value.txt", "a")
+            f.write(hash)
             f.close()
-            print(f)
       - uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           branch: gh-pages
