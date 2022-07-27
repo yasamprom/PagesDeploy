@@ -11,8 +11,6 @@ jobs:
       - run: echo "Hi!"
       - run: echo "TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
       - run: echo $TAG
-      - run: echo ${{ github.sha }} >> $HASH
-      - run: echo $hash
       - uses: actions/setup-python@v2
       - uses: jannekem/run-python-script-action@v1
         with:
@@ -20,7 +18,7 @@ jobs:
             import os
             os.mkdir("data/" + os.getenv("TAG"))
             f = open("data/" + os.getenv("TAG") + "/value.txt", "a")
-            f.write(os.getenv("HASH"))
+            f.write(os.getenv("GITHUB_SHA"))
             f.close()
       - uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
