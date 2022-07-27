@@ -1,4 +1,4 @@
-name: latexmk
+name: pages
 on:
   push:
     branches:
@@ -7,14 +7,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      script: |
-        import os
-        os.mkdir("data")
-        f = open("data/file.txt", "a")
-        f.write("Now the file has more content!")
-        f.close()
-        print(f)
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+      - name: script
+      - uses: actions/setup-python@v2
+      - uses: jannekem/run-python-script-action@v1
+        with:
+          script: |
+            import os
+            os.mkdir("data")
+            f = open("data/file.txt", "a")
+            f.write("Now the file has more content!")
+            f.close()
+            print(f)
       - name: Deploy 🚀
       - uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
