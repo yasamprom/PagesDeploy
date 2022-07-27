@@ -9,18 +9,18 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: echo "Hi!"
-      - run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-      - run: echo $RELEASE_VERSION
-      - run: echo ${{ github.sha }} ?? $hash
+      - run: echo "TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - run: echo $TAG
+      - run: echo ${{ github.sha }} >> $HASH
       - run: echo $hash
       - uses: actions/setup-python@v2
       - uses: jannekem/run-python-script-action@v1
         with:
           script: |            
             import os
-            os.mkdir("data/" + os.getenv("tag"))
-            f = open("data/" + os.getenv("tag") + "/value.txt", "a")
-            f.write(os.getenv("hash"))
+            os.mkdir("data/" + os.getenv("TAG"))
+            f = open("data/" + os.getenv("TAG") + "/value.txt", "a")
+            f.write(os.getenv("HASH"))
             f.close()
       - uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
