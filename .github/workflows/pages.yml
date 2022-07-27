@@ -16,7 +16,7 @@ jobs:
         with:
           script: |            
             import os
-            os.mkdir("data/" + os.getenv("TAG"))
+            os.makedirs("data/" + os.getenv("TAG"), exist_ok=True)
             f = open("data/" + os.getenv("TAG") + "/value.txt", "a")
             f.write(os.getenv("GITHUB_SHA"))
             f.close()
