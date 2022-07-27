@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: mkdir -p data && touch data/tags.txt
-      - run: git show-ref --tags --heads
+      - run: git show-ref --tags --heads > data/tags.txt
       - run: sed -i '' 's+refs/tags/++g' data/tags.txt
       - uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
