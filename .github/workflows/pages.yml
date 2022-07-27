@@ -9,16 +9,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-        tag=${GITHUB_REF#refs/heads/}
-        hash=$(git rev-parse --short "$GITHUB_SHA")
+        export tag=${GITHUB_REF#refs/heads/}
+        export hash=$(git rev-parse --short "$GITHUB_SHA")
       - uses: actions/setup-python@v2
       - uses: jannekem/run-python-script-action@v1
         with:
           script: |            
             import os
-            os.mkdir("data/" + tag)
-            f = open("data/" + tag + "/value.txt", "a")
-            f.write(hash)
+            os.mkdir("data/" + os.getenv("tag"))
+            f = open("data/" + os.getenv("tag") + "/value.txt", "a")
+            f.write(os.getenv("hash"))
             f.close()
       - uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
